@@ -2,6 +2,8 @@
 #### 4-channel nanoloop inspired midi sequencer for monome norns
 ###### by 0F.digital
 
+*please note: this is my first norns/lua project, so the code is no doubt messy. i'm still learning!*
+
 outputs on midi channels 1 to 4, as well as basic internal voice (PolyPerc).
 
 controls are shown on-screen, but here they are for clarity:

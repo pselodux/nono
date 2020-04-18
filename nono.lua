@@ -181,10 +181,14 @@ function patterndraw()
     screen.level(1)
     screen.move(82,62)
     screen.text_center("pos")
+    screen.move(114,62)
+    screen.text_center("note")
   elseif hold2 == 1 and hold3 == 0 then
     screen.level(1)
     screen.move(82,62)
     screen.text_center("note")
+    screen.move(114,62)
+    screen.text_center("octave")
   elseif hold2 == 0 and hold3 == 1 then
     screen.level(1)
     screen.move(114,8)
@@ -194,6 +198,10 @@ function patterndraw()
     screen.move(114,62)
     screen.text_center("rotate")
   end
+end
+
+function setnote(d)
+  step[vischan][currentpos] = util.clamp(step[vischan][currentpos] + d, 24, 96)
 end
 
 function patternenc(n,d)
@@ -210,11 +218,12 @@ function patternenc(n,d)
   elseif n == 1 and hold3 == 0 then
     counter.time = 15 / bpm
     bpm = util.clamp(bpm + d, 10, 500)
-  elseif n == 2 and hold3 == 0 and hold2 == 0 and hold3 == 0 then
+  elseif n == 2 and hold3 == 0 and hold2 == 0 then
     currentpos = util.clamp(currentpos + d, 1, length[vischan])
   elseif n == 2 and hold3 == 0 and hold2 == 1 then
-    step[vischan][currentpos] = util.clamp(step[vischan][currentpos] + d, 24, 96)
+    setnote(d)
   end
+
   if n == 2 and hold3 == 1 then
     for i=1,length[vischan] do
       if step[vischan][i] > 0 then
@@ -228,6 +237,10 @@ function patternenc(n,d)
   elseif n == 3 and hold3 == 1 and d < 0 then
     table.insert(step[vischan], step[vischan][1])
     table.remove(step[vischan], 1)    
+  elseif n == 3 and hold3 == 0 and hold2 == 1 then
+    setnote(d * 12)
+  elseif n == 3 then
+    setnote(d)
   end
 end
 

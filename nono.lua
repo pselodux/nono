@@ -20,8 +20,11 @@
 -- key3: cycle channel
 --
 -- enc2: edit position
+-- enc3: select note
 --
 -- key2+enc2: select note
+-- key2+enc3: edit octave
+
 -- key3+enc1: channel length
 -- key3+enc2: transpose
 -- channel
